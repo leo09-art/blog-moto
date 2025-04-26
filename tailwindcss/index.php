@@ -38,10 +38,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $req->execute([$person['id'], $_POST['id_final']]);
             $req = $bdd->prepare("UPDATE moto set nb_like_moto = nb_like_moto + 1 where id_moto = ?");
             $req->execute([$_POST['id_final']]);
-        }else{
+        } else {
             $req = $bdd->prepare("UPDATE moto set nb_like_moto = nb_like_moto - 1 where id_moto = ?");
             $req->execute([$_POST['id_final']]);
-            $req=$bdd->prepare("DELETE from like_moto where id_user = ? and id_moto = ?");
+            $req = $bdd->prepare("DELETE from like_moto where id_user = ? and id_moto = ?");
             $req->execute([$person['id'], $_POST['id_final']]);
         }
     }
@@ -54,17 +54,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $req->execute([$_COOKIE['email']]);
     $person = $req->fetch(PDO::FETCH_ASSOC);
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 if (isset($_POST['fermer'])) {
@@ -173,46 +162,13 @@ if (isset($_POST['fermer'])) {
         #bg {
             z-index: 0;
         }
-
-        /* .svg-submit {
-            width: 40px;
-            height: 40px;
-            background-color: transparent;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" fill="%231f1f1f"><path d="M720-120H280v-520l280-280 50 50q7 7 11.5 19t4.5 23v14l-44 174h258q32 0 56 24t24 56v80q0 7-2 15t-4 15L794-168q-9 20-30 34t-44 14Zm-360-80h360l120-280v-80H480l54-220-174 174v406Zm0-406v406-406Zm-80-34v80H160v360h120v80H80v-520h200Z"/></svg>');
-            background-repeat: no-repeat;
-            background-position: center;
-            background-size: contain;
-            border: none;
-            cursor: pointer;
-            padding: 5;
-        } */
     </style>
 </head>
 
 <body id="haut" class="text-[#BE3D2A]">
 
-    <!-- <section id="popup-overlay" class=" fixed top-0 bottom-0 left-0 right-0 bg-red-500">
-        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-99 bg-red-900 w-[70vh]">
-            <h2 class="text-2xl">Laisser votre commentaire </h2>
-            <textarea name="" id="" rows="12" cols="50" placeholder="Votre commentaire..." class="w-[70vh]"></textarea>
-            <div class="absolute top-[-20px] right-[-15px] bg-black text-white p-2">
-                <input type="button" onclick="togglePopup()" value="Fermer">
-            </div>
-            <div class="w-[100%] flex justify-around">
-                <form action="" method="post">
-                    <input class="hover:bg-green-500 p-3 mb-1 rounded bg-white hover:scale-[1.2] duration-300 delay-300" onclick="togglePopup()" type="submit" name="ok2" id="ok2" value="Valider">
-                </form>
-            </div>
-
-
-        </div>
-
-    </section> -->
-
 
     <section id="bg" class="">
-
-
 
         <div id="tete" class="flex justify-between sticky top-0 bg-[#F5C45E] h-[100px] w-[98vw] rounded-xl z-98 fixed">
             <div>
@@ -288,7 +244,7 @@ if (isset($_POST['fermer'])) {
                     </div>
                     <main class="p-4 md:p-14 md:col-span-3">
 
-                     <!-- creer le formulaire du popup -->
+                        <!-- creer le formulaire du popup -->
                         <form action="" method="post">
                             <section id="popup-overlay" class=" fixed top-0 bottom-0 left-0 right-0 bg-red-500">
                                 <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-99 bg-red-900 w-[70vh]">
@@ -331,8 +287,8 @@ if (isset($_POST['fermer'])) {
                                                         <div class="col-span-4 grid grid-rows-2 ">
                                                             <span class="font-bold text-2xl uppercase row-span-1" id="nom-<?php echo $index ?>"></span>
                                                             <input type="button" name="ok1" value="Commenter" id="popup-<?php echo $index ?>" class="row-span-1 p-1 bg-gray-800 hover:text-[#60B5FF] hover:text-[24px] min-h-[50px] flex justify-center items-center hover:bg-[#123458] duration-100 delay-100">
-                                                             
-                                                             <!-- recupere l'id de la moto pour le popup -->
+
+                                                            <!-- recupere l'id de la moto pour le popup -->
                                                             <!-- <input type="text" name="id_moto-<?php echo $index ?>" id="id_moto-<?php echo $index ?>" class="block"> -->
                                                         </div>
                                                         <div class="col-span-4  flex justify-around gap-4">
@@ -342,12 +298,16 @@ if (isset($_POST['fermer'])) {
                                                                 <!-- le champ permettant de liker la moto -->
                                                                 <div id="like_boutton-<?php echo $index ?>" class="p-[5px] flex justify-center bg-white">
                                                                     <?php
-                                                                        $req = $bdd->prepare("SELECT 1 from like_moto where id_user=? and id_moto = ?");
-                                                                        $req->execute([$person['id'], $moto['id_moto']]);
-                                                                        $hasliked = $req->fetch() ;
+                                                                    $req = $bdd->prepare("SELECT 1 from like_moto where id_user=? and id_moto = ?");
+                                                                    $req->execute([$person['id'], $moto['id_moto']]);
+                                                                    $hasliked = $req->fetch();
                                                                     ?>
                                                                     <!-- <input type="submit" class="svg-submit g-white rounded-lg" name="ok1" value=""> -->
-                                                                    <button type="submit" class="svg-submit g-white rounded-lg scale-150 " name="ok1" id="ok1"><?php if($hasliked){echo "❤️";} else {echo "🤍";} ?></button>
+                                                                    <button type="submit" class="svg-submit g-white rounded-lg scale-150 " name="ok1" id="ok1"><?php if ($hasliked) {
+                                                                                                                                                                    echo "❤️";
+                                                                                                                                                                } else {
+                                                                                                                                                                    echo "🤍";
+                                                                                                                                                                } ?></button>
                                                                     <input type="hidden" id="like_cache-<?php echo $index ?>" name="id_final">
                                                                 </div>
 
@@ -377,10 +337,6 @@ if (isset($_POST['fermer'])) {
                                             </form>
                                         <?php endforeach; ?>
                                     </div>
-
-
-
-
 
                                 </div>
 
@@ -514,8 +470,7 @@ if (isset($_POST['fermer'])) {
         console.log(motoItems);
 
         articles.forEach((moto, index) => {
-            // console.log(index);
-
+            //recuperer les champs adéquats de chaque moto
             const motoItem = motoItems[index];
             const lien = document.getElementById('lien-' + index);
             const image_moto = document.getElementById('image-' + index);
@@ -523,37 +478,16 @@ if (isset($_POST['fermer'])) {
             const prix_moto = document.getElementById('prix-' + index);
             const like_moto = document.getElementById('like-' + index);
             const commentaire_moto = document.getElementById('commentaire-' + index);
-            // const id_moto = document.getElementById('id_moto-' + index);
             const laisse_com = document.getElementById('laisse_com');
             const popup = document.getElementById('popup-' + index);
             document.getElementById('id_final').value = moto.id_moto;
             const like_cache = document.getElementById("like_cache-" + index);
 
-            // like_cache.onclick = () =>{
-            //     changerBg(like_cache);
-            // }
+
 
 
             afficher_id("like_cache-" + index, moto.id_moto);
 
-            // document.addEventListener("DOMContentLoaded", function() {
-            //     let path = document.getElementById("mysvg-" + index).querySelector("path");
-            //     let savedColor = localStorage.getItem("svgColor" + index);
-
-            //     if (savedColor) {
-            //         path.setAttribute("fill", savedColor);
-            //     }
-            //     document.getElementById("like_boutton-" + index).addEventListener("click", function(event) {
-            //         event.preventDefault();
-            //         let path = document.getElementById("mysvg-" + index).querySelector("path");
-
-            //         let currentColor = path.getAttribute("fill");
-            //         let newcolor = currentColor == "blue" ? "red" : "blue";
-            //         path.setAttribute("fill", newcolor);
-            //         localStorage.setItem("svgColor" + index, newcolor);
-            //         document.getElementById("myform-" + index).submit();
-            //     })
-            // })
 
             document.addEventListener("DOMContentLoaded", function() {
                 let button = document.getElementById("like_boutton-" + index);
@@ -570,16 +504,13 @@ if (isset($_POST['fermer'])) {
                     let newcolor = currentColor == "white" ? "green" : "white";
                     button.style.background = newcolor;
                     localStorage.setItem("bgColor" + index, newcolor);
-                    // document.getElementById("myform-" + index).submit();
                 })
             })
 
 
             popup.onclick = () => togglePopup(moto.nom_moto, moto.id_moto);
 
-            // lien.name = 
 
-            // id_moto.value = moto.id_moto;
             image_moto.src = moto.image_moto;
             lien.href = "page_moto.php?id_moto=" + moto.id_moto;
             nom_moto.innerHTML = moto.nom_moto;
@@ -587,7 +518,7 @@ if (isset($_POST['fermer'])) {
 
             laisse_com.innerHTML = "commenter la " + moto.nom_moto;
 
-
+            //gerer le nombre de like et de commentaire
             if (moto.nb_like_moto == 0) {
                 like_moto.innerHTML = "Pas de like";
             } else if (moto.nb_like_moto == 1) {
