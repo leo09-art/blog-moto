@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meteo</title>
+    <!-- <script src="../../style.js"></script> -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Afacad+Flux:wght@100..1000&family=Agu+Display&family=Caveat:wght@400..700&family=Dancing+Script:wght@400..700&family=Noto+Sans+JP:wght@100..900&family=Playwrite+PT+Guides&family=Playwrite+TZ+Guides&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Afacad+Flux:wght@100..1000&family=Agu+Display&family=Caveat:wght@400..700&family=Dancing+Script:wght@400..700&family=Edu+AU+VIC+WA+NT+Arrows:wght@400..700&family=Noto+Sans+JP:wght@100..900&family=Playwrite+PT+Guides&family=Playwrite+TZ+Guides&display=swap');
+
+        body {
+            font-family: "Caveat", serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #5f93ac5e;
+
+        }
+
+        .container #flocon {
+            position: absolute;
+            animation: rotate 5s linear infinite;
+            height: 70px;
+            width: 70px;
+            left: 45%;
+            z-index: 0;
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: rotateY(0deg);
+                top: -60px;
+                scale: 1;
+            }
+
+            50% {
+                transform: rotateY(180deg);
+                top: 50%;
+                scale: 3;
+            }
+
+            100% {
+                transform: rotateY(360deg);
+                scale: 1;
+                top: 100%;
+            }
+        }
+
+        .container {
+            top: -10%;
+            border: 1px thick blue;
+            box-shadow: 0 0 8px rgb(50, 198, 224);
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            background-image: url(bg_meteo.webp);
+            background-size: cover;
+            transition: 1s;
+        }
+
+        .container:hover {
+            box-shadow: 0 5px 20px rgb(63, 79, 223);
+        }
+
+        .container #affichage {
+            z-index: 1;
+            top: -150px;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+
+        .container #affichage img {
+            height: 70px;
+            width: 70px;
+            animation: bouge 5s linear infinite;
+        }
+
+        @keyframes bouge {
+            0% {
+                scale: 0.8;
+            }
+
+            50% {
+                scale: 1;
+            }
+
+            100% {
+                scale: 0.8;
+            }
+        }
+
+        .container #affichage span {
+            font-size: 40px;
+        }
+
+        .container #affichage #units {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container #affichage #units span {
+            cursor: pointer;
+            font-size: 20px;
+        }
+
+        .container #effet {
+            position: relative;
+        }
+
+        .container #effet h2 {
+            position: relative;
+            font-size: 130px;
+            top: -50px;
+        }
+
+        .container #effet i {
+            position: absolute;
+            inset: 0;
+            font-size: 5px;
+            border: 0px dotted powderblue;
+            transition: 2s;
+        }
+
+        .container #effet i:nth-child(2) {
+            border-radius: 38% 62% 63% 37% / 41% 44% 56% 59%;
+            animation: anime1 3s linear infinite;
+        }
+
+        .container #effet i:nth-child(3) {
+            border-radius: 41% 44% 56% 59%/38% 62% 63% 37%;
+            animation: anime2 5s linear infinite;
+        }
+
+        @keyframes anime1 {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes anime2 {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .container #effet:hover i {
+            border: 6px solid var(--clr);
+            filter: drop-shadow(0 0 14px var(--clr));
+        }
+
+
+        .container div #cible {
+            position: relative;
+            top: -150px;
+            height: 50px;
+            width: 90%;
+            font-size: 25px;
+            text-align: center;
+            font-family: "Afacad Flux", serif;
+        }
+
+        .container #btn {
+            z-index: 1;
+        }
+
+        .container #btn input {
+            font-size: 20px;
+            color: rgb(36, 240, 172);
+            border: 1px double steelblue;
+            border-radius: 5px;
+            box-shadow: 0 0 16px rgb(104, 175, 148);
+            transition: 1s;
+        }
+
+        .container #btn input:hover {
+            box-shadow: 0 0 25px plum;
+        }
+
+        .container #recup input {
+            top: -230px;
+            background: silver;
+        }
+
+        .container #recherche {
+            cursor: pointer;
+        }
+
+        .container #info {
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            color: black;
+            letter-spacing: 3px;
+            font-size: 22px;
+            font-weight: 900;
+        }
+        section p a{
+            position: absolute;
+            top: 0;
+            left: 0;
+            color: white;
+            font-size: 20px;
+            text-decoration: none;
+            padding: 10px;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        function F_units() {
+            // return units = Element.getElementById('C').value;
+            getweather("imperial")
+        }
+        function C_units() {
+            getweather("metric")
+        }
+        function getweather(unit) {
+            const cible = document.getElementById('cible').value;
+            if (cible.trim() == 0) {
+                alert('Veuillez entrer un nom de pays.');
+            }
+            if (unit != "imperial") {
+                unit = "metric";
+            }
+
+            window.fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cible}&units=${unit}&lang=fr&appid=fdd2592f42436e28a5a28c77dac08e28`)
+                .then(res => res.json())
+                // .then(res=> console.log(res))
+                .then(resJson => {
+                    const temperature = resJson.main.temp;
+                    const pression = resJson.main.pressure;
+                    const humid = resJson.main.humidity;
+                    const vent = resJson.wind.speed;
+
+                    const temperatureElement = document.getElementById('temperature');
+                    if (unit == "imperial") {
+                        temperatureElement.textContent = `${temperature}°F`;
+                        document.getElementById('Humid').textContent = `${humid} %`;
+                        document.getElementById('pression').textContent = `${pression} %`;
+                        document.getElementById('vent').textContent = `${vent} km/h`;
+                    }
+                    else {
+                        temperatureElement.textContent = `${temperature}°C`;
+                        document.getElementById('Humid').textContent = `${humid} %`;
+                        document.getElementById('pression').textContent = `${pression} %`;
+                        document.getElementById('vent').textContent = `${vent} km/h`;
+                    }
+                })
+
+
+
+        }
+        function hello() { alert('veuilllez mon proc') }
+    </script>
+<section class="top-0">
+    <p><a href="../index.php">Retour a l'accueil</a></p>
+</section>
+    <div class="container">
+        <img src="blue-simple-snowflakes.png" id="flocon">
+        <div id="effet">
+            <h2>Meteo</h2>
+            <i style="--clr:#ff0057;"></i>
+            <i style="--clr:#fffd44;"></i>
+        </div>
+
+
+        <div id="affichage">
+            <img src="logo-meteo.png" alt="">
+            <span id="temperature">en cours...</span>
+            <div id="units">
+                <span id="C" onclick="C_units()">°C</span>
+                <span id="F" onclick="F_units()">°F</span>
+            </div>
+        </div>
+        <div id="info">
+            <div id="info1">
+                <label for="">Précip :</label>
+                <span id="pression"></span>
+            </div>
+            <div id="info2">
+                <label for="">Humid :</label>
+                <span id="Humid"></span>
+            </div>
+            <div id="info3">
+                <label for="">Vent :</label>
+                <span id="vent"></span>
+            </div>
+
+        </div>
+        <div id="btn">
+            <input type="submit" value="Rechercher" id="recherche" onclick="getweather()">
+        </div>
+        <div id="recup">
+            <input type="text" id="cible" placeholder="rechercher un pays">
+        </div>
+
+
+    </div>
+
+</body>
+
+</html>
