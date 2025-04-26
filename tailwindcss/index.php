@@ -287,9 +287,8 @@ if (isset($_POST['fermer'])) {
                         </nav>
                     </div>
                     <main class="p-4 md:p-14 md:col-span-3">
-                        <!-- <div class="my-2 text-blue-800 flex justify-center md:justify-end ">
 
-                        </div> -->
+                     <!-- creer le formulaire du popup -->
                         <form action="" method="post">
                             <section id="popup-overlay" class=" fixed top-0 bottom-0 left-0 right-0 bg-red-500">
                                 <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-99 bg-red-900 w-[70vh]">
@@ -321,8 +320,9 @@ if (isset($_POST['fermer'])) {
 
 
                                     <div class="py-16 grid md:grid-cols-2 lg:grid-cols-3  gap-4  ">
+                                        <!-- parcourir toutes les motos de la bd -->
                                         <?php foreach ($motos as $index => $moto) : ?>
-
+                                            <!-- creer un formulaire pour chaque moto afin de pouvoir recuperer les id des motos selectionnées -->
                                             <form action="" method="post" id="myform-<?php echo $index ?>">
                                                 <div id="moto-<?php echo $index ?>" class="moto-item rounded overflow-hidden shadow-md relative my-2 hover:shadow-2xl col-span-1 grow">
                                                     <a id="lien-<?php echo $index ?>"><img alt=""
@@ -331,13 +331,15 @@ if (isset($_POST['fermer'])) {
                                                         <div class="col-span-4 grid grid-rows-2 ">
                                                             <span class="font-bold text-2xl uppercase row-span-1" id="nom-<?php echo $index ?>"></span>
                                                             <input type="button" name="ok1" value="Commenter" id="popup-<?php echo $index ?>" class="row-span-1 p-1 bg-gray-800 hover:text-[#60B5FF] hover:text-[24px] min-h-[50px] flex justify-center items-center hover:bg-[#123458] duration-100 delay-100">
-                                                            <!-- <a href="index.php?id_moto=<?php echo $index ?>" class="row-span-1 p-1 bg-gray-800 hover:text-[#60B5FF] hover:text-[24px] min-h-[50px] flex justify-center items-center hover:bg-[#123458]">Commenter</a> -->
+                                                             
+                                                             <!-- recupere l'id de la moto pour le popup -->
                                                             <!-- <input type="text" name="id_moto-<?php echo $index ?>" id="id_moto-<?php echo $index ?>" class="block"> -->
                                                         </div>
                                                         <div class="col-span-4  flex justify-around gap-4">
-                                                            <div class="mt-5">
+                                                            <div class="mt-5  pt-[15%]">
                                                                 <div id="like-<?php echo $index ?>" class="flex justify-center items-center gap-2">
                                                                 </div>
+                                                                <!-- le champ permettant de liker la moto -->
                                                                 <div id="like_boutton-<?php echo $index ?>" class="p-[5px] flex justify-center bg-white">
                                                                     <?php
                                                                         $req = $bdd->prepare("SELECT 1 from like_moto where id_user=? and id_moto = ?");
@@ -349,14 +351,10 @@ if (isset($_POST['fermer'])) {
                                                                     <input type="hidden" id="like_cache-<?php echo $index ?>" name="id_final">
                                                                 </div>
 
-                                                                <!-- <button type="submit" id="like_boutton-<?php echo $index ?>" name="ok1" class="svg-submit">
-                                                                    <svg id="mysvg-<?php echo $index  ?>" xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" fill="#1f1f1f">
-                                                                        <path d="M720-120H280v-520l280-280 50 50q7 7 11.5 19t4.5 23v14l-44 174h258q32 0 56 24t24 56v80q0 7-2 15t-4 15L794-168q-9 20-30 34t-44 14Zm-360-80h360l120-280v-80H480l54-220-174 174v406Zm0-406v406-406Zm-80-34v80H160v360h120v80H80v-520h200Z" />
-                                                                    </svg>
-                                                                </button> -->
+
 
                                                             </div>
-
+                                                            <!-- le champ qui permet d'afficher le popup -->
                                                             <div id="commentaire-<?php echo $index ?>" class="flex justify-center items-center gap-2">
 
                                                             </div>
@@ -364,6 +362,8 @@ if (isset($_POST['fermer'])) {
 
 
                                                     </div>
+
+                                                    <!-- afficher le prix de la moto -->
                                                     <div
                                                         class="bg-blue-200 text-white text-sm p-2 rounded-full inline absolute top-0 ml-2 mt-2 flex justify-center">
 
