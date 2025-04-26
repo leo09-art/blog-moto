@@ -182,7 +182,7 @@ if (isset($_POST['fermer'])) {
             </div>
             <div class=" flex justify-center justify-items-center ">
                 <ul class="flex justify-center">
-                    <li><a href="index.php" class="p-3 m-6 ">
+                    <li class=""><a href="index.php" class="p-3 m-6 flex items-center justify-center ">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor" class="size-6 width-2 ml-2">
                                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -296,7 +296,7 @@ if (isset($_POST['fermer'])) {
                                                                 <div id="like-<?php echo $index ?>" class="flex justify-center items-center gap-2">
                                                                 </div>
                                                                 <!-- le champ permettant de liker la moto -->
-                                                                <div id="like_boutton-<?php echo $index ?>" class="p-[5px] flex justify-center bg-white">
+                                                                <div id="like_boutton-<?php echo $index ?>" class="p-[5px] flex justify-center bg-transparent">
                                                                     <?php
                                                                     $req = $bdd->prepare("SELECT 1 from like_moto where id_user=? and id_moto = ?");
                                                                     $req->execute([$person['id'], $moto['id_moto']]);
@@ -463,11 +463,11 @@ if (isset($_POST['fermer'])) {
 
 
         const articles = <?php echo json_encode($motos)  ?>;
-        console.log(articles);
+        // console.log(articles);
         // const la_moto = document.getElementById('moto');
 
         const motoItems = document.querySelectorAll('.moto-item');
-        console.log(motoItems);
+        // console.log(motoItems);
 
         articles.forEach((moto, index) => {
             //recuperer les champs adéquats de chaque moto

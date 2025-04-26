@@ -7,7 +7,7 @@ if (isset($_GET['id_moto'])) {
     $req->bindParam(':id', $id_moto, PDO::PARAM_INT);
     $req->execute();
     $moto = $req->fetch(PDO::FETCH_ASSOC);
-    var_dump($moto);
+    // var_dump($moto);
 
 
     // $req = $bdd->prepare("SELECT * from commentaire where id_moto = :id");
@@ -19,6 +19,7 @@ if (isset($_GET['id_moto'])) {
     $req->bindParam(':id', $id_moto, PDO::PARAM_INT);
     $req->execute();
     $commentaires = $req->fetchAll(PDO::FETCH_ASSOC);
+    $rows = $req->rowCount();
 }
 
 
@@ -99,31 +100,13 @@ if (isset($_GET['id_moto'])) {
             </div>
         </div>
 
-        <!-- <div>
-            <p class="table-auto text-white flex justify-center text-3xl"><?php ?></p>
-            <table class="text-white flex justify-center text-3xl gap-5 border-red-200 rounded-xl">
-                <tr>
-                    <th class="mx-7 flex justify-center">Commentaire</th>
-                    <th class="mx-7 ">Utilisateur</th>
-                </tr>
-                <?php foreach ($commentaires as $commentaire): ?>
-                    <tr class="text-white">
-                        <td class="mx-7 text-center border-red-200 rounded-xl"><?php echo $commentaire['description']; ?></td>
-                        <td class="mx-7 text-center "><?php echo $commentaire['name'] ?></td>
-                    </tr>
-                <?php endforeach; ?>
-            </table>
-        </div> -->
-
-
-
-
-
-
-
     </div>
     </div>
+    <div class="flex justify-center bg-blue-100 text-4xl">
+            <?php if($rows==0) echo "Pas de commentaires"; ?>
+        </div>
     <div class="bg-blue-100 h-100 w-100 p-10 grid grid-cols-3 gap-5">
+        
         <?php foreach ($commentaires as $commentaire): ?>
             <div class="bg-gray-300 rounded-[30px] ">
                 <div class="flex justify-start ">
